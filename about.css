@@ -1,0 +1,21 @@
+/* ==============================
+   ABOUT.CSS
+   Styles for the About Me section
+============================== */
+
+#about {
+  background-color: white;
+  padding: 60px 30px;
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+#about-note {
+  background-color: #eff6ff;
+  border-left: 4px solid #2563eb;
+  padding: 14px 18px;
+  margin-top: 20px;
+  font-size: 14px;
+  color: #444444;
+  border-radius: 0 6px 6px 0;
+}

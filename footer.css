@@ -1,0 +1,13 @@
+/* ==============================
+   FOOTER.CSS
+   Styles for the footer
+   at the bottom of the page
+============================== */
+
+#footer {
+  background-color: #111827;
+  text-align: center;
+  padding: 20px;
+  font-size: 13px;
+  color: #888888;
+}

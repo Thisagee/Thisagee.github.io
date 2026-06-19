@@ -1,0 +1,92 @@
+/* ==============================
+   BASE.CSS
+   General styles that apply
+   to the whole page
+============================== */
+
+/* Remove default spacing from all elements */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+/* Set the default font and background for the whole page */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+  color: #333333;
+  line-height: 1.6;
+}
+
+/* Style for all links */
+a {
+  color: #2563eb;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* A reusable class for section headings */
+.section-title {
+  font-size: 26px;
+  color: #1e3a5f;
+  margin-bottom: 15px;
+  padding-bottom: 8px;
+  border-bottom: 3px solid #2563eb;
+  display: inline-block;
+}
+
+/* A reusable class for regular paragraph text */
+.section-text {
+  font-size: 15px;
+  color: #555555;
+  margin-bottom: 12px;
+}
+
+/* A reusable style for small tag labels */
+.tag {
+  display: inline-block;
+  background-color: #eff6ff;
+  border: 1px solid #bfdbfe;
+  color: #1d4ed8;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+  margin: 3px;
+}
+
+/* A reusable style for buttons */
+.button {
+  display: inline-block;
+  padding: 10px 24px;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: bold;
+  text-decoration: none;
+  margin: 5px;
+}
+
+.button-blue {
+  background-color: #2563eb;
+  color: white;
+  border: 2px solid #2563eb;
+}
+
+.button-blue:hover {
+  background-color: #1d4ed8;
+  text-decoration: none;
+}
+
+.button-white {
+  background-color: transparent;
+  color: white;
+  border: 2px solid white;
+}
+
+.button-white:hover {
+  background-color: white;
+  color: #1e3a5f;
+  text-decoration: none;
+}

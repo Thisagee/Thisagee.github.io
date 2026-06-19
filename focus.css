@@ -1,0 +1,50 @@
+/* ==============================
+   FOCUS.CSS
+   Styles for the Focus Areas section
+============================== */
+
+#focus {
+  background-color: #f0f4ff;
+  padding: 60px 30px;
+}
+
+#focus-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-top: 25px;
+  max-width: 860px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.focus-card {
+  background-color: white;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  padding: 20px;
+  width: 48%;
+}
+
+.focus-icon {
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+.focus-card-title {
+  font-size: 15px;
+  color: #1e3a5f;
+  margin-bottom: 8px;
+}
+
+.focus-card-text {
+  font-size: 13px;
+  color: #666666;
+}
+
+/* On small screens, make cards full width */
+@media (max-width: 600px) {
+  .focus-card {
+    width: 100%;
+  }
+}
