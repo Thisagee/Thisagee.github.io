@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Thisagee — Cybersecurity & Software Developer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg:        #0a0e1a;
+      --surface:   #111827;
+      --card:      #1a2235;
+      --border:    #1f2f4a;
+      --accent:    #00d4aa;
+      --accent2:   #3b82f6;
+      --danger:    #f43f5e;
+      --text:      #e2e8f0;
+      --muted:     #64748b;
+      --mono:      'JetBrains Mono', monospace;
+      --sans:      'Space Grotesk', sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1rem 2rem;
+      background: rgba(10,14,26,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: var(--mono);
+      color: var(--accent);
+      font-size: 1rem;
+      letter-spacing: 0.05em;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      padding: 6rem 2rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-grid {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 40px 40px;
+      opacity: 0.3;
+    }
+    .hero-glow {
+      position: absolute;
+      top: -200px; left: -200px;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(0,212,170,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-glow2 {
+      position: absolute;
+      bottom: -200px; right: -100px;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(59,130,246,0.1) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-content {
+      max-width: 900px; margin: 0 auto;
+      position: relative; z-index: 1;
+    }
+    .hero-tag {
+      display: inline-block;
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      padding: 0.3rem 0.8rem;
+      border-radius: 2px;
+      margin-bottom: 1.5rem;
+      letter-spacing: 0.1em;
+    }
+    .hero-name {
+      font-size: clamp(2.5rem, 7vw, 5rem);
+      font-weight: 700;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.5rem;
+    }
+    .hero-name span { color: var(--accent); }
+    .hero-role {
+      font-family: var(--mono);
+      font-size: clamp(1rem, 2.5vw, 1.3rem);
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+    }
+    .hero-role .cursor {
+      display: inline-block;
+      width: 2px; height: 1.2em;
+      background: var(--accent);
+      vertical-align: middle;
+      animation: blink 1s step-end infinite;
+    }
+    @keyframes blink { 50% { opacity: 0; } }
+    .hero-bio {
+      font-size: 1.05rem;
+      color: #94a3b8;
+      max-width: 600px;
+      margin-bottom: 2.5rem;
+      line-height: 1.75;
+    }
+    .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      border-radius: 4px;
+      font-family: var(--sans);
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s;
+      cursor: pointer;
+      border: none;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #0a0e1a;
+    }
+    .btn-primary:hover { background: #00b896; transform: translateY(-1px); }
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* ── SECTION BASE ── */
+    section { padding: 5rem 2rem; }
+    .container { max-width: 900px; margin: 0 auto; }
+    .section-label {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--accent);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+    .section-title {
+      font-size: clamp(1.6rem, 4vw, 2.2rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 3rem;
+      position: relative;
+      padding-bottom: 1rem;
+    }
+    .section-title::after {
+      content: '';
+      position: absolute; bottom: 0; left: 0;
+      width: 48px; height: 2px;
+      background: var(--accent);
+    }
+
+    /* ── ABOUT ── */
+    #about { background: var(--surface); }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+    .about-text p {
+      color: #94a3b8;
+      margin-bottom: 1rem;
+      line-height: 1.8;
+    }
+    .stat-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    .stat-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.25rem;
+    }
+    .stat-number {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--accent);
+      font-family: var(--mono);
+    }
+    .stat-label {
+      font-size: 0.8rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-top: 0.25rem;
+    }
+
+    /* ── SKILLS ── */
+    #skills { background: var(--bg); }
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+    .skill-group {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.5rem;
+      transition: border-color 0.2s;
+    }
+    .skill-group:hover { border-color: var(--accent); }
+    .skill-group-icon {
+      font-size: 1.5rem;
+      margin-bottom: 0.75rem;
+    }
+    .skill-group-title {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 1rem;
+    }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .tag {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      padding: 0.25rem 0.6rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      color: #94a3b8;
+    }
+    .tag.accent { border-color: var(--accent); color: var(--accent); }
+    .tag.blue { border-color: var(--accent2); color: var(--accent2); }
+
+    /* ── PROJECTS ── */
+    #projects { background: var(--surface); }
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    .project-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.75rem;
+      display: flex; flex-direction: column;
+      transition: border-color 0.25s, transform 0.25s;
+      position: relative;
+      overflow: hidden;
+    }
+    .project-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      transform: scaleX(0);
+      transition: transform 0.3s;
+      transform-origin: left;
+    }
+    .project-card:hover { border-color: var(--accent); transform: translateY(-4px); }
+    .project-card:hover::before { transform: scaleX(1); }
+    .project-period {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--muted);
+      margin-bottom: 0.75rem;
+    }
+    .project-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+      color: var(--text);
+    }
+    .project-desc {
+      font-size: 0.875rem;
+      color: #94a3b8;
+      line-height: 1.7;
+      flex: 1;
+      margin-bottom: 1.25rem;
+    }
+    .project-tech { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: auto; }
+    .tech-badge {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      padding: 0.2rem 0.5rem;
+      background: rgba(0,212,170,0.08);
+      border: 1px solid rgba(0,212,170,0.25);
+      color: var(--accent);
+      border-radius: 3px;
+    }
+
+    /* ── EXPERIENCE ── */
+    #experience { background: var(--bg); }
+    .timeline { position: relative; padding-left: 2rem; }
+    .timeline::before {
+      content: '';
+      position: absolute; left: 0; top: 8px; bottom: 8px;
+      width: 1px;
+      background: linear-gradient(to bottom, var(--accent), var(--accent2), transparent);
+    }
+    .timeline-item {
+      position: relative;
+      margin-bottom: 2.5rem;
+    }
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -2.45rem;
+      top: 8px;
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 2px solid var(--bg);
+      box-shadow: 0 0 0 3px rgba(0,212,170,0.2);
+    }
+    .timeline-period {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--accent);
+      margin-bottom: 0.3rem;
+    }
+    .timeline-title {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+    .timeline-org {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 0.6rem;
+    }
+    .timeline-desc {
+      font-size: 0.875rem;
+      color: #94a3b8;
+      line-height: 1.7;
+    }
+
+    /* ── CERTIFICATIONS ── */
+    #certifications { background: var(--surface); }
+    .cert-card {
+      display: flex; align-items: center; gap: 1.25rem;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 1rem;
+      transition: border-color 0.2s;
+    }
+    .cert-card:hover { border-color: var(--accent2); }
+    .cert-icon {
+      font-size: 1.75rem;
+      flex-shrink: 0;
+    }
+    .cert-title { font-weight: 600; font-size: 0.95rem; }
+    .cert-issuer {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-top: 0.2rem;
+    }
+    .cert-date {
+      margin-left: auto;
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--accent2);
+      white-space: nowrap;
+    }
+
+    /* ── CONTACT ── */
+    #contact {
+      background: var(--bg);
+      text-align: center;
+    }
+    .contact-box {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 3rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .contact-box p {
+      color: #94a3b8;
+      margin-bottom: 2rem;
+      line-height: 1.8;
+    }
+    .contact-links { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+    .contact-link {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.7rem 1.25rem;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      text-decoration: none;
+      color: var(--text);
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+    .contact-link:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem;
+      text-align: center;
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 640px) {
+      nav { padding: 1rem; }
+      .nav-links { gap: 1rem; }
+      .nav-links a { font-size: 0.75rem; }
+      .about-grid { grid-template-columns: 1fr; }
+      .stat-grid { grid-template-columns: 1fr 1fr; }
+      .contact-box { padding: 2rem 1.25rem; }
+    }
+
+    /* ── FADE IN ANIMATION ── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <span class="nav-logo">Thisagee<span style="color:var(--muted);">.github.io</span></span>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+  <div class="hero-content">
+    <div class="hero-tag">// Available for Internships</div>
+    <h1 class="hero-name">Hi, I'm <span>Thisagee</span></h1>
+    <p class="hero-role">Cybersecurity &amp; Software Developer<span class="cursor"></span></p>
+    <p class="hero-bio">
+      A Cybersecurity undergraduate at SLIIT, passionate about building secure systems
+      and solving real-world problems through code. I combine security thinking with
+      practical development skills across Java, Python, and web technologies.
+    </p>
+    <div class="hero-cta">
+      <a href="#projects" class="btn btn-primary">View My Projects</a>
+      <a href="#contact" class="btn btn-outline">Get In Touch</a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container fade-in">
+    <p class="section-label">// about me</p>
+    <h2 class="section-title">Who I Am</h2>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>
+          I'm a second-year BSc (Hons) Information Technology student specializing in
+          Cybersecurity at the Sri Lanka Institute of Information Technology (SLIIT),
+          graduating in 2028.
+        </p>
+        <p>
+          My background spans both the offensive and defensive sides of technology —
+          I understand how systems are built, and how they can be broken. That perspective
+          drives me to write cleaner, more secure code.
+        </p>
+        <p>
+          Outside of academics, I serve as Customer Experience Team Leader at AIESEC in
+          SLIIT, where I developed strong leadership and communication skills working
+          with international volunteers.
+        </p>
+      </div>
+      <div class="stat-grid">
+        <div class="stat-card">
+          <div class="stat-number">3</div>
+          <div class="stat-label">Projects Built</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">5+</div>
+          <div class="stat-label">Tech Stacks</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">2028</div>
+          <div class="stat-label">Expected Grad</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">1</div>
+          <div class="stat-label">Certification</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="container fade-in">
+    <p class="section-label">// technical skills</p>
+    <h2 class="section-title">What I Work With</h2>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <div class="skill-group-icon">💻</div>
+        <div class="skill-group-title">Programming</div>
+        <div class="skill-tags">
+          <span class="tag accent">Java</span>
+          <span class="tag accent">Python</span>
+          <span class="tag accent">C</span>
+          <span class="tag accent">C++</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-icon">🌐</div>
+        <div class="skill-group-title">Web Technologies</div>
+        <div class="skill-tags">
+          <span class="tag blue">HTML</span>
+          <span class="tag blue">CSS</span>
+          <span class="tag blue">JavaScript</span>
+          <span class="tag blue">JSP</span>
+          <span class="tag blue">Spring Boot</span>
+          <span class="tag blue">REST API</span>
+          <span class="tag blue">JWT</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-icon">🔐</div>
+        <div class="skill-group-title">Cybersecurity</div>
+        <div class="skill-tags">
+          <span class="tag accent">Network Security</span>
+          <span class="tag accent">Cybersecurity Fundamentals</span>
+          <span class="tag accent">Risk Management</span>
+          <span class="tag accent">Networking Basics</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-icon">🗄️</div>
+        <div class="skill-group-title">Databases & OS</div>
+        <div class="skill-tags">
+          <span class="tag">MySQL</span>
+          <span class="tag">OOP</span>
+          <span class="tag">Data Structures</span>
+          <span class="tag">Windows</span>
+          <span class="tag">Ubuntu</span>
+          <span class="tag">Kali Linux</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="container fade-in">
+    <p class="section-label">// projects</p>
+    <h2 class="section-title">Things I've Built</h2>
+    <div class="projects-grid">
+
+      <div class="project-card">
+        <div class="project-period">Jul – Nov 2025</div>
+        <div class="project-title">Web-Based Dental Management System</div>
+        <div class="project-desc">
+          A role-based clinic management system with patient record management
+          and appointment scheduling. Built with Spring Boot and secured using
+          JWT authentication.
+        </div>
+        <div class="project-tech">
+          <span class="tech-badge">Java</span>
+          <span class="tech-badge">Spring Boot</span>
+          <span class="tech-badge">MySQL</span>
+          <span class="tech-badge">REST API</span>
+          <span class="tech-badge">JWT</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-period">Jan – May 2025</div>
+        <div class="project-title">Hotel Room Reservation System</div>
+        <div class="project-desc">
+          A reservation management system with room allocation, booking features,
+          and efficient data structures for handling reservation logic.
+        </div>
+        <div class="project-tech">
+          <span class="tech-badge">Java</span>
+          <span class="tech-badge">JSP</span>
+          <span class="tech-badge">HTML</span>
+          <span class="tech-badge">CSS</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-period">Jul – Nov 2024</div>
+        <div class="project-title">Home Automation System</div>
+        <div class="project-desc">
+          A smart home prototype with integrated sensors and actuators for
+          automated control, plus a mobile-accessible web interface for
+          remote management.
+        </div>
+        <div class="project-tech">
+          <span class="tech-badge">Arduino UNO</span>
+          <span class="tech-badge">C++</span>
+          <span class="tech-badge">HTML</span>
+          <span class="tech-badge">CSS</span>
+          <span class="tech-badge">JavaScript</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="container fade-in">
+    <p class="section-label">// experience & education</p>
+    <h2 class="section-title">My Journey</h2>
+    <div class="timeline">
+
+      <div class="timeline-item">
+        <div class="timeline-period">Jan 2026 – Present</div>
+        <div class="timeline-title">Customer Experience Team Leader</div>
+        <div class="timeline-org">AIESEC in SLIIT — Outgoing Global Volunteer</div>
+        <div class="timeline-desc">
+          Leading a team to deliver exceptional volunteer experiences for outgoing global volunteers.
+          Responsible for coordination, communication, and team management.
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-period">Aug 2025 – Jan 2026</div>
+        <div class="timeline-title">Customer Experience Team Member</div>
+        <div class="timeline-org">AIESEC in SLIIT — Outgoing Global Volunteer</div>
+        <div class="timeline-desc">
+          Supported volunteer coordination and customer experience initiatives within the organization.
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-period">2024 – 2028 (Expected)</div>
+        <div class="timeline-title">BSc (Hons) Information Technology — Cybersecurity</div>
+        <div class="timeline-org">Sri Lanka Institute of Information Technology (SLIIT)</div>
+        <div class="timeline-desc">
+          Specializing in Cybersecurity with coursework covering network security,
+          cryptography, software development, and systems programming.
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-period">2023 Batch</div>
+        <div class="timeline-title">G.C.E Advanced Level — Arts Stream</div>
+        <div class="timeline-org">Subjects: Information Technology, Business Statistics, Logic & Scientific Method</div>
+        <div class="timeline-desc">Completed A/Ls with a focus on technology and analytical subjects.</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certifications">
+  <div class="container fade-in">
+    <p class="section-label">// certifications</p>
+    <h2 class="section-title">Credentials</h2>
+    <div class="cert-card">
+      <div class="cert-icon">🛡️</div>
+      <div>
+        <div class="cert-title">Google Cybersecurity Professional Certificate</div>
+        <div class="cert-issuer">Coursera · Google</div>
+      </div>
+      <div class="cert-date">March 2026</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container fade-in">
+    <p class="section-label">// contact</p>
+    <h2 class="section-title" style="text-align:center; margin-bottom:2rem;">Let's Connect</h2>
+    <div class="contact-box">
+      <p>
+        I'm actively looking for internship and entry-level opportunities in
+        cybersecurity and software development. If you think I'd be a good fit
+        for your team, I'd love to hear from you.
+      </p>
+      <div class="contact-links">
+        <a href="https://github.com/Thisagee" class="contact-link" target="_blank">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+          GitHub
+        </a>
+        <a href="mailto:your.email@gmail.com" class="contact-link">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          Email Me
+        </a>
+        <a href="https://www.linkedin.com/in/thisagee" class="contact-link" target="_blank">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+          LinkedIn
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>Designed &amp; Built by Thisagee · 2026</p>
+</footer>
+
+<script>
+  // Scroll fade-in
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
